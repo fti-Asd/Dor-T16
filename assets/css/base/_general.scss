@@ -1,3 +1,12 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "redhat";
+}
+
 body,html{
     display: flex;
     justify-content: center;
@@ -6,6 +15,40 @@ body,html{
     width: 100%;
 }
 
-ul{
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+ol {
     list-style: none;
+}
+
+h1{
+    font-size: clamp(1rem,calc(0.5rem + 2vw), 1.5rem);
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+
+    :focus {
+        border: none;
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+input {
+    &:focus {
+        border: none;
+        box-shadow: none;
+        outline: none;
+    }
 }

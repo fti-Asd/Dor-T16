@@ -22,21 +22,43 @@
         <div class="container d-flex flex-column justify-content-center align-items-center">
             <h1 class="mb-5">map</h1>
             <div class="row g-3">
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <ul class="nav nav-pills mb-3" id="map-tabs" role="tablist"></ul>
         
                     <div class="tab-content" id="map-tabContent"></div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="">
-                        <div class="location-list">
-                            <h3>locations</h3>
-                            <ul class="list"></ul>
+                        <div class="location-list p-3 d-flex flex-column">
+                            <div>
+                                <h3 class="mb-3">locations</h3>
+
+                                <div class="row">
+                                    <div class="col-3">latititu</div>
+
+                                    <div class="col-3">longitude</div>
+
+                                    <div class="col-6"></div>
+                                </div>
+
+                                <ul class="list m-0 p-0 d-flex flex-column gap-4"></ul>
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-4">
+                                <button id="delete-all" class="bg-danger p-2 round rounded-2 text-white">حذف همه</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <ul id="custom-menu">
+                <li>Zoom In</li>
+                <li>Zoom Out</li>
+                <li>Get Location</li>
+                <li>Close</li>
+            </ul>
         </div>
 
         <script src="./assets/vendor/jquery/js/jquery.min.js"></script>
@@ -49,11 +71,13 @@
 
         <script src="./assets/vendor/leaflet/js/leaflet.js"></script>
 
-        <script src="./assets/js/locationArray.js" defer></script>
+        <script src="./assets/js/FakeLocation.js" defer></script>
 
         <script src="./assets/js/map.js" defer></script> 
+        
+        <script src="./assets/js/customMenu.js" defer></script>
 
-        <script src="./assets/js/menu.js" defer></script>
+        <script src="./assets/js/locationList.js" defer></script>
 
         <script src="./assets/js/app.js" defer></script> 
 

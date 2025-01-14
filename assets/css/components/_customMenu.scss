@@ -11,7 +11,27 @@
     }
 }
 
+#custom-menu {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    list-style: none;
 
-       
+    #custom-menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+    
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+  
+
 
         
