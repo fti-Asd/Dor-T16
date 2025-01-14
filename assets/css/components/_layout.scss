@@ -1,0 +1,26 @@
+#map-container{
+    width: 800px;
+    height: 400px;
+    border-radius: 30px;
+
+    @include media-query(992px){
+        width: 650px;
+    }
+
+    @include media-query(768px){
+        width: 600px;
+    }
+
+    @include media-query(576px){
+        width: 300px;
+    }
+
+    @include media-query(360px){
+        width: 250px;
+    }
+}
+
+.leaflet-container .leaflet-control-attribution {
+    display: none;
+}
+  

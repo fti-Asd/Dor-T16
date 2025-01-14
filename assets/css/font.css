@@ -1,0 +1,46 @@
+/* English (Latin) Unicode range */
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-Regular.ttf")
+        format("truetype");
+    font-weight: 400;
+    unicode-range: U+0020-007F; /* Basic Latin */
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-Regular.ttf")
+        format("truetype");
+    font-weight: 600;
+    unicode-range: U+0020-007F; /* Basic Latin */
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-Bold.ttf") format("truetype");
+    font-weight: 700;
+    unicode-range: U+0020-007F;
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-Regular.ttf")
+        format("truetype");
+    font-weight: 400;
+    unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-SemiBold.ttf")
+        format("truetype");
+    font-weight: 600;
+    unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+    font-family: "redhat";
+    src: url("../../public/fonts/redhat/RedHatText-Bold.ttf") format("truetype");
+    font-weight: 700;
+    unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+}
