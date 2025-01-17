@@ -31,11 +31,17 @@
                 <div class="col-lg-4">
                     <div class="">
                         <div class="location-list p-3 d-flex flex-column">
-                            <div>
-                                <h3 class="mb-3">locations</h3>
+                            <div class="d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3>locations</h3>
+                                
+                                    <div class="d-flex justify-content-end">
+                                        <button id="delete-all" class="bg-danger py-2 px-3 round rounded-2 text-white">delete all</button>
+                                    </div>
+                                </div>
 
-                                <div class="row">
-                                    <div class="col-3">latititu</div>
+                                <div class="row mb-2">
+                                    <div class="col-3">latititude</div>
 
                                     <div class="col-3">longitude</div>
 
@@ -44,18 +50,12 @@
 
                                 <ul class="list m-0 p-0 d-flex flex-column gap-4"></ul>
                             </div>
-
-                            <div class="d-flex justify-content-end mt-4">
-                                <button id="delete-all" class="bg-danger p-2 round rounded-2 text-white">حذف همه</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <ul id="custom-menu">
-                <li>Zoom In</li>
-                <li>Zoom Out</li>
                 <li>Get Location</li>
                 <li>Close</li>
             </ul>
@@ -69,16 +69,16 @@
 
         <script src="./assets/vendor/swiper/js/swiper-bundle.min.js"></script>
 
-        <script src="./assets/vendor/leaflet/js/leaflet.js"></script>
+        <script src="./assets/vendor/leaflet/js/leaflet.js" defer></script>
 
         <script src="./assets/js/FakeLocation.js" defer></script>
 
         <script src="./assets/js/map.js" defer></script> 
         
         <script src="./assets/js/customMenu.js" defer></script>
-
+        
         <script src="./assets/js/locationList.js" defer></script>
-
+        
         <script src="./assets/js/app.js" defer></script> 
 
     </body>

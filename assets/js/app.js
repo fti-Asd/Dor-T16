@@ -14,17 +14,17 @@ locations.forEach((item, index) => {
 });
 
 tabsUl.addEventListener("click", (e) => {
-    if (e.target && e.target.matches("button.nav-link")) {
-        const targetId = e.target.getAttribute("data-bs-target").substring(1);
+  if (e.target && e.target.matches("button.nav-link")) {
+      const targetId = e.target.getAttribute("data-bs-target").substring(1);
 
-        document.querySelectorAll(".nav-link").forEach((btn) => btn.classList.remove("active","text-white","bg-warning"));
-        document.querySelectorAll(".tab-pane").forEach((pane) => pane.classList.remove("show", "active"));
+      document.querySelectorAll(".nav-link").forEach((btn) => btn.classList.remove("active","text-white","bg-warning"));
+      document.querySelectorAll(".tab-pane").forEach((pane) => pane.classList.remove("show", "active"));
 
-        e.target.classList.add("active","text-white","bg-warning");
-        document.getElementById(targetId).classList.add("show", "active","text-white","bg-warning");
+      e.target.classList.add("active","text-white","bg-warning");
+      document.getElementById(targetId).classList.add("show", "active","text-white","bg-warning");
 
-        mapViewHandler(targetId.split("-")[2])
-    }
+      mapViewHandler(targetId.split("-")[2])
+  }
 });
 
 mapViewHandler()

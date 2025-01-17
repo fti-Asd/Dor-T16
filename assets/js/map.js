@@ -1,30 +1,21 @@
-let mapList=[];
-let map;
+let mapList = [];
+let newMap;
 
 function createSharedMap(mapContainer, location) {
-    if (!mapList.includes(mapContainer)) {
-        map = L.map(mapContainer).setView(location, 17);
-
-        mapList.push(mapContainer);
+    if (!mapList.some(map => map.container === mapContainer)) {
+        newMap = L.map(mapContainer).setView(location, 17);
         
-        // map.dragging.disable();
-        // map.touchZoom.disable();
-        // map.doubleClickZoom.disable();
-        map.scrollWheelZoom.disable();
-
-        // map.dragging.enable();
-        // map.touchZoom.enable();
-        // map.doubleClickZoom.enable();
-        // map.scrollWheelZoom.enable();
-
+        mapList.push({ container: mapContainer, map: newMap });
+        
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        }).addTo(newMap);
+
     } else {
-        map.setView(location, 17);
+        const existingMap = mapList.find(map => map.container === mapContainer);
+        existingMap.map.setView(location, 17);
     }
 }
-
 
 function addMarker(object){
     let dornikaIcon = L.icon({
@@ -35,9 +26,8 @@ function addMarker(object){
     });
 
     L.marker(object.location, { icon: dornikaIcon })
-    .addTo(map)
-    .bindPopup(object.popUpText).openPopup();;
-
+    .addTo(newMap)
+    .bindPopup(object.popUpText).openPopup();
 }
 
 function mapViewHandler(index=0){
@@ -49,4 +39,172 @@ function mapViewHandler(index=0){
     }
 }
 
-mapViewHandler()
+function getLocation(selectedMap, callback) {
+    const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
+    
+    if (!currentMap) {
+        console.error("Map not found for the selected container.");
+        return;
+    }
+
+    const map = currentMap.map;
+
+    let lastLocation = null;
+
+    map.on("contextmenu", (e) => {
+        const { lat, lng } = e.latlng;
+        lastLocation = { latitude: lat, longitude: lng };
+
+        console.log("Coordinates from contextmenu:", lat, lng);
+
+        callback(lastLocation); 
+    });
+}
+
+// function getLocation(selectedMap, callback) {
+//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
+    
+//     if (!currentMap) {
+//         console.error("Map not found for the selected container.");
+//         return;
+//     }
+
+//     const map = currentMap.map;
+
+//     // متغیر جهانی برای ذخیره آخرین موقعیت کلیک
+//     let lastLocation = null;
+
+//     // ثبت رویداد contextmenu برای هر نقشه
+//     map.on("contextmenu", (e) => {
+//         const { lat, lng } = e.latlng;
+//         lastLocation = { latitude: lat, longitude: lng };  // ذخیره آخرین موقعیت
+
+//         console.log("Coordinates from contextmenu:", lat, lng);
+
+//         if (callback && lastLocation) {
+//             callback(lastLocation);  // ارسال موقعیت از طریق callback
+//         }
+//     });
+
+//     // ارسال موقعیت آخرین کلیک به callback (در صورت نیاز)
+//     if (lastLocation) {
+//         callback(lastLocation);
+//     }
+// }
+
+
+// function getLocation(selectedMap, callback) {
+//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
+    
+//     if (!currentMap) {
+//         console.error("Map not found for the selected container.");
+//         return;
+//     }
+
+//     const map = currentMap.map;
+
+//     map.on("contextmenu", (e) => {
+//         const { lat, lng } = e.latlng;
+
+//         console.log("Coordinates from contextmenu:", lat, lng);
+
+//         if (callback) {
+//             callback({ latitude: lat, longitude: lng });
+//         }
+//     });
+// }
+
+
+// function getLocation(selectedMap) {
+//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
+    
+//     if (!currentMap) {
+//         console.error("Map not found for the selected container.");
+//         return null;
+//     }
+
+//     const map = currentMap.map;
+
+//     let latitude="";
+//     let longitude="";
+
+//     map.on("contextmenu", (e) => {
+//         const { lat, lng } = e.latlng;
+//         latitude=lat;
+//         longitude=lng;
+//         console.log(lat,lng);
+//     });
+//     console.log(latitude,longitude);
+
+//     return [latitude,longitude];
+// }
+
+
+
+
+// function getLocation(selectedMap) {
+//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
+
+//     if (!currentMap) {
+//         console.error("Map not found for the selected container.");
+//         return null;
+//     }
+
+//     const map = currentMap.map;
+
+//     return new Promise((resolve) => {
+//         map.once("contextmenu", (e) => {
+//             e.originalEvent.preventDefault();
+
+//             const { lat, lng } = e.latlng;
+//             const location = { latitude: lat, longitude: lng };
+
+//             console.log("New Location:", location);
+//             resolve(location); // بازگرداندن مختصات از طریق Promise
+//         });
+//     });
+// }
+
+
+// function getLocation(selectedMap) {
+//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));    
+    
+//     const map = currentMap.map;
+//     let location = { latitude: "", longitude: "" };
+
+//     map.on("contextmenu", (e) => {
+//         e.originalEvent.preventDefault();
+//         let { lat, lng } = e.latlng;
+
+//         location.latitude = lat;
+//         location.longitude = lng;
+//     });
+
+//     console.log("Location updated:", location);
+
+//     return location;
+// }
+
+// function getLocation(selectedMap) {
+//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));    
+    
+//     const map = currentMap.map;
+//     let location ={latitude:"",longitude:""};
+
+//     console.log(map._container.id);
+
+//     map.on("contextmenu", (e) => {
+//         e.originalEvent.preventDefault();
+//         let { lat, lng } = e.latlng;
+
+//         location = {latitude:"",longitude:""};
+
+//         location.latitude = lat;
+//         location.longitude = lng;
+
+//         console.log(lat,lng);
+        
+//     });
+
+//     return location;
+// }
