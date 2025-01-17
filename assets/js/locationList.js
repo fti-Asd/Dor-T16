@@ -6,9 +6,9 @@ let index=0;
 
 function addToList(latitude,longitude){       
     listUl.innerHTML += `<li class="row">
-                        <div class="col-3">${latitude?.toFixed(4)}</div>
+                        <div class="col-3">${latitude?.toFixed(5)}</div>
 
-                        <div class="col-3">${longitude?.toFixed(4)}</div>
+                        <div class="col-3">${longitude?.toFixed(5)}</div>
 
                         <div class="col-6">
                             <div class="d-flex justify-content-end align-items-center">
@@ -31,18 +31,59 @@ listUl.addEventListener("click", (e) => {
     const button = e.target.closest("button");
     if (button) {        
         const targetId = button.getAttribute("id");
-        console.log(targetId);
 
-        const li = button.closest("li");
-        if (li) {
-            li.remove();
-            index--;
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(targetId);
+
+                const li = button.closest("li");
+                if (li) {
+                    li.remove();
+                    index--;
+                }
+
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+
+        
     }
 });
 
 
 deleteAllButton.addEventListener("click", () => {
-    listUl.innerHTML = "";
-    index=0
+    if(index > 0){
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                listUl.innerHTML = "";
+                index=0
+    
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
 });

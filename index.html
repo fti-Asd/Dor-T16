@@ -20,11 +20,27 @@
 
     <body>
         <div class="container d-flex flex-column justify-content-center align-items-center">
-            <h1 class="mb-5">map</h1>
+            <h1 class="my-5">map</h1>
             <div class="row g-3">
                 <div class="col-lg-8">
-                    <ul class="nav nav-pills mb-3" id="map-tabs" role="tablist"></ul>
-        
+                    <ul class="nav nav-pills mb-3 map-tabs d-none d-md-flex" role="tablist"></ul>
+
+                    <nav class="navbar d-block d-md-none fixed-top">
+                        <div class="container-fluid">
+                          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                            <div class="offcanvas-header">
+                              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <ul class="nav nav-pills mb-3 map-tabs d-flex flex-column" role="tablist"></ul>
+                            </div>
+                          </div>
+                        </div>
+                    </nav>
+
                     <div class="tab-content" id="map-tabContent"></div>
                 </div>
 
@@ -70,6 +86,8 @@
         <script src="./assets/vendor/swiper/js/swiper-bundle.min.js"></script>
 
         <script src="./assets/vendor/leaflet/js/leaflet.js" defer></script>
+
+        <script src="./assets/vendor/alert/js/sweetalert2@11.js" defer></script>
 
         <script src="./assets/js/FakeLocation.js" defer></script>
 

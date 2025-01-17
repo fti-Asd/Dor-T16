@@ -1,5 +1,6 @@
 let mapList = [];
 let newMap;
+let lastLocation= { latitude: "", longitude: "" };;
 
 function createSharedMap(mapContainer, location) {
     if (!mapList.some(map => map.container === mapContainer)) {
@@ -12,6 +13,14 @@ function createSharedMap(mapContainer, location) {
         }).addTo(newMap);
 
         newMap.scrollWheelZoom.disable();
+
+        newMap.on("contextmenu", (e) => {
+            // console.log(e.target._container.id);
+            
+            const { lat, lng } = e.latlng;
+            lastLocation = { latitude: lat, longitude: lng };
+            // console.log("Coordinates from contextmenu:", lat, lng);
+        });
 
     } else {
         const existingMap = mapList.find(map => map.container === mapContainer);
@@ -41,172 +50,7 @@ function mapViewHandler(index=0){
     }
 }
 
-function getLocation(selectedMap, callback) {
-    const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
-    
-    if (!currentMap) {
-        console.error("Map not found for the selected container.");
-        return;
-    }
 
-    const map = currentMap.map;
-
-    let lastLocation = null;
-
-    map.on("contextmenu", (e) => {
-        const { lat, lng } = e.latlng;
-        lastLocation = { latitude: lat, longitude: lng };
-
-        console.log("Coordinates from contextmenu:", lat, lng);
-
-        callback(lastLocation); 
-    });
+function getLocation(callback) {
+    callback(lastLocation)
 }
-
-// function getLocation(selectedMap, callback) {
-//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
-    
-//     if (!currentMap) {
-//         console.error("Map not found for the selected container.");
-//         return;
-//     }
-
-//     const map = currentMap.map;
-
-//     // متغیر جهانی برای ذخیره آخرین موقعیت کلیک
-//     let lastLocation = null;
-
-//     // ثبت رویداد contextmenu برای هر نقشه
-//     map.on("contextmenu", (e) => {
-//         const { lat, lng } = e.latlng;
-//         lastLocation = { latitude: lat, longitude: lng };  // ذخیره آخرین موقعیت
-
-//         console.log("Coordinates from contextmenu:", lat, lng);
-
-//         if (callback && lastLocation) {
-//             callback(lastLocation);  // ارسال موقعیت از طریق callback
-//         }
-//     });
-
-//     // ارسال موقعیت آخرین کلیک به callback (در صورت نیاز)
-//     if (lastLocation) {
-//         callback(lastLocation);
-//     }
-// }
-
-
-// function getLocation(selectedMap, callback) {
-//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
-    
-//     if (!currentMap) {
-//         console.error("Map not found for the selected container.");
-//         return;
-//     }
-
-//     const map = currentMap.map;
-
-//     map.on("contextmenu", (e) => {
-//         const { lat, lng } = e.latlng;
-
-//         console.log("Coordinates from contextmenu:", lat, lng);
-
-//         if (callback) {
-//             callback({ latitude: lat, longitude: lng });
-//         }
-//     });
-// }
-
-
-// function getLocation(selectedMap) {
-//     const currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
-    
-//     if (!currentMap) {
-//         console.error("Map not found for the selected container.");
-//         return null;
-//     }
-
-//     const map = currentMap.map;
-
-//     let latitude="";
-//     let longitude="";
-
-//     map.on("contextmenu", (e) => {
-//         const { lat, lng } = e.latlng;
-//         latitude=lat;
-//         longitude=lng;
-//         console.log(lat,lng);
-//     });
-//     console.log(latitude,longitude);
-
-//     return [latitude,longitude];
-// }
-
-
-
-
-// function getLocation(selectedMap) {
-//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));
-
-//     if (!currentMap) {
-//         console.error("Map not found for the selected container.");
-//         return null;
-//     }
-
-//     const map = currentMap.map;
-
-//     return new Promise((resolve) => {
-//         map.once("contextmenu", (e) => {
-//             e.originalEvent.preventDefault();
-
-//             const { lat, lng } = e.latlng;
-//             const location = { latitude: lat, longitude: lng };
-
-//             console.log("New Location:", location);
-//             resolve(location); // بازگرداندن مختصات از طریق Promise
-//         });
-//     });
-// }
-
-
-// function getLocation(selectedMap) {
-//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));    
-    
-//     const map = currentMap.map;
-//     let location = { latitude: "", longitude: "" };
-
-//     map.on("contextmenu", (e) => {
-//         e.originalEvent.preventDefault();
-//         let { lat, lng } = e.latlng;
-
-//         location.latitude = lat;
-//         location.longitude = lng;
-//     });
-
-//     console.log("Location updated:", location);
-
-//     return location;
-// }
-
-// function getLocation(selectedMap) {
-//     let currentMap = mapList.find(map => map.container.getAttribute("id") === selectedMap.getAttribute("id"));    
-    
-//     const map = currentMap.map;
-//     let location ={latitude:"",longitude:""};
-
-//     console.log(map._container.id);
-
-//     map.on("contextmenu", (e) => {
-//         e.originalEvent.preventDefault();
-//         let { lat, lng } = e.latlng;
-
-//         location = {latitude:"",longitude:""};
-
-//         location.latitude = lat;
-//         location.longitude = lng;
-
-//         console.log(lat,lng);
-        
-//     });
-
-//     return location;
-// }
