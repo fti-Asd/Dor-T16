@@ -11,6 +11,8 @@ function createSharedMap(mapContainer, location) {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(newMap);
 
+        newMap.scrollWheelZoom.disable();
+
     } else {
         const existingMap = mapList.find(map => map.container === mapContainer);
         existingMap.map.setView(location, 17);
